@@ -19,7 +19,6 @@ const SecondPage = () => {
       // Update the existing document in the carvana collection
       const result = await FirebaseUtil.updateDocument("carvana", documentId, {
         password2,
-        updatedAt: new Date().toISOString()
       });
 
       // Check if update was successful
