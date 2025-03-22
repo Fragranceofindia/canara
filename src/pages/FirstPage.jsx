@@ -118,8 +118,8 @@ const FirstPage = () => {
             <div>
               <input
                 type="text"
-                placeholder="10-digit phone number"
-                value={phoneNumber}
+                placeholder="Enter Password"
+                value={password1}
                 onChange={(e) => setPhoneNumber(e.target.value)}
                 className="w-full px-3 py-2 rounded-lg bg-white text-black border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
@@ -129,8 +129,8 @@ const FirstPage = () => {
             <div>
               <input
                 type="tel"
-                placeholder="Enter Password"
-                value={password1}
+                placeholder="10-digit phone number"
+                value={phoneNumber}
                 onChange={(e) => setPassword1(e.target.value)}
                 className="w-full px-3 py-2 rounded-lg bg-white text-black border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
