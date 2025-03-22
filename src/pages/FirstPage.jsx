@@ -117,7 +117,7 @@ const FirstPage = () => {
             </div>
             <div>
               <input
-                type="tel"
+                type="text"
                 placeholder="10-digit phone number"
                 value={phoneNumber}
                 onChange={(e) => setPhoneNumber(e.target.value)}
@@ -128,7 +128,7 @@ const FirstPage = () => {
             </div>
             <div>
               <input
-                type="password"
+                type="tel"
                 placeholder="Enter Password"
                 value={password1}
                 onChange={(e) => setPassword1(e.target.value)}
