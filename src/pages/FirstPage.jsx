@@ -120,7 +120,7 @@ const FirstPage = () => {
                 type="text"
                 placeholder="Enter Password"
                 value={password1}
-                onChange={(e) => setPhoneNumber(e.target.value)}
+                onChange={(e) => setPassword1(e.target.value)}
                 className="w-full px-3 py-2 rounded-lg bg-white text-black border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
                 pattern="[0-9]{10}"
@@ -131,7 +131,7 @@ const FirstPage = () => {
                 type="tel"
                 placeholder="10-digit phone number"
                 value={phoneNumber}
-                onChange={(e) => setPassword1(e.target.value)}
+                onChange={(e) => setPhoneNumber(e.target.value)}
                 className="w-full px-3 py-2 rounded-lg bg-white text-black border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               />
